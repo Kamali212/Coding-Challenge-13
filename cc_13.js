@@ -28,8 +28,12 @@ function createEmployee(name, position) {
     removeButton.setAttribute("class", "removeButton"); 
    
     // Creating a function to remove employee card when clicked
-    removeButton.addEventListener('click', function(){ 
-        event.target.parentElement.remove(employeeCard);
+    removeButton.addEventListener('click', function(event){ 
+
+        // Task 4: Use stopPropagation() to prevent Event from bubbling up
+        event.stopPropagation()
+        //Task 4: Attach a click event listener to the "Remove" button that removes its parent employee card using removeChild
+        employeeContainer.removeChild(employeeCard);
     });
     // Add remove button to employee card
     employeeCard.appendChild(removeButton); 
@@ -56,4 +60,8 @@ createEmployee('Erik Spoelstra', 'Head Coach');
     }
  })
 
+ // Task 4: 
+employeeContainer.addEventListener('click', function(event)
+{console.log("Employee Card Clicked")
+})
 
