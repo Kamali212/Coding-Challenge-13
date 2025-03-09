@@ -39,6 +39,60 @@ function createEmployee(name, position) {
     employeeCard.appendChild(removeButton); 
     // Add employee card to employee container
     employeeContainer.appendChild(employeeCard); 
+
+// Task 5: Inline editing of employee details 
+
+// Create edit button 
+const editButton = document.createElement('button')
+editButton.textContent = 'Edit';
+editButton.setAttribute('class', "editButton")
+
+// Edit button 
+editButton.addEventListener('dblclick', function() {
+    
+    // Pre-populate the input fields with the existing employee name and position.
+    const nameInput = document.createElement('input');
+    nameInput.value = employeeName.textContent;
+    
+    const positionInput = document.createElement('input');
+    positionInput.value = employeePosition.textContent;
+    
+    // Add the input content to employee card
+    employeeCard.appendChild(nameInput);
+    employeeCard.appendChild(positionInput);
+
+    // Remove static content from employee card
+    employeeCard.removeChild(employeeName);
+    employeeCard.removeChild(employeePosition);
+
+    // Create save button when edit button is double clicked
+    const saveButton = document.createElement('button');
+    saveButton.textContent = 'Save';
+    saveButton.setAttribute("class", "saveButton")
+    
+    // Save input when save button is clicked 
+    saveButton.addEventListener('click', function() {
+        // Update text content to input values
+        employeeName.textContent = nameInput.value;
+        employeePosition.textContent = positionInput.value;
+        
+        // Add static conent to employee card
+        employeeCard.appendChild(employeeName);
+        employeeCard.appendChild(employeePosition);
+
+        // Remove input content from employee card
+        employeeCard.removeChild(nameInput);
+        employeeCard.removeChild(positionInput);
+
+        // Remove save button after saving so it doesn't add everytime edit button is clicked
+        saveButton.remove();
+    })
+    
+    // Add save button when edit button is double clicked
+    employeeCard.appendChild(saveButton)
+})
+// Add edit button to employee card
+employeeCard.appendChild(editButton)
 }
 
 
@@ -60,8 +114,8 @@ createEmployee('Erik Spoelstra', 'Head Coach');
     }
  })
 
- // Task 4: 
+ // Task 4: Implementing Removal of Employee Cards with Event Bubbling
+ // Add a message when employee card is clicked
 employeeContainer.addEventListener('click', function(event)
-{console.log("Employee Card Clicked")
-})
+{console.log("Employee Card Clicked")})
 
