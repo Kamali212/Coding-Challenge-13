@@ -1,34 +1,59 @@
-// Task 2 Adding Employee Cards Dynamically\
+// Task 2 Adding Employee Cards Dynamically
 const employeeContainer = document.getElementById("employeeContainer");
 
 // Function to create employee card
 function createEmployee(name, position) {
-    const employeeCard = document.createElement('div'); // Create element for employee card
-    employeeCard.setAttribute("class", "employeeCard"); // Add class
-
-    const employeeName = document.createElement('h1'); // Create element for employee name
-    employeeName.textContent = name; // Employee name
-    employeeCard.appendChild(employeeName); // Add name to employee card
-    
-    const employeePosition = document.createElement('p'); // Create element for employee position
-    employeePosition.textContent = position; // Employee position
-    employeeCard.appendChild(employeePosition); // Add position to employee card
-
-    const removeButton = document.createElement('button'); // Create remove button to remove employee card
-    removeButton.textContent = 'Remove'; //  Add text content
-    removeButton.setAttribute("class", "removeButton"); // Add class
-    removeButton.addEventListener('click', function(){ // Creating a function to remove employee card when clicked
-        employeeContainer.removeChild(employeeCard);
+    // Create element for employee card
+    const employeeCard = document.createElement('div'); 
+    // Add class
+    employeeCard.setAttribute("class", "employeeCard"); 
+    // Create element for employee name
+    const employeeName = document.createElement('h3'); 
+    // Employee name
+    employeeName.textContent = name; 
+    // Add employee name to employee card
+    employeeCard.appendChild(employeeName); 
+    // Create element for employee position
+    const employeePosition = document.createElement('p'); 
+    // Employee position
+    employeePosition.textContent = position; 
+    // Add position to employee card
+    employeeCard.appendChild(employeePosition); 
+   
+    // Create remove button to remove employee card
+    const removeButton = document.createElement('button'); 
+    //  Add text content
+    removeButton.textContent = 'Remove'; 
+    // Add class
+    removeButton.setAttribute("class", "removeButton"); 
+   
+    // Creating a function to remove employee card when clicked
+    removeButton.addEventListener('click', function(){ 
+        event.target.parentElement.remove(employeeCard);
     });
-    employeeCard.appendChild(removeButton); // Add remove button to employee card
-    employeeContainer.appendChild(employeeCard); // Add employee card to employee container
+    // Add remove button to employee card
+    employeeCard.appendChild(removeButton); 
+    // Add employee card to employee container
+    employeeContainer.appendChild(employeeCard); 
 }
 
-function removeEmployeeCard(card) { // Function that will remove employee card when remove button is clicked 
-    employeeContainer.removeChild(card);
-}
+
 
 // Test Cases 
 createEmployee('Jayson Tatum', 'Basketball Player');
 createEmployee('Erik Spoelstra', 'Head Coach');
+
+// Task 3 Converting NodeLists to Arrays for Bulk Updates: Each card should display -Updated
+// Select employee cards with querySelectorAll
+ const employeeCardNodeList = document.querySelectorAll(".employeeCard");
+ // Convernt NodeList to array
+ const employeeCardArray =  Array.from(employeeCardNodeList);
+ // Use array method to add "Updated" to each employee card
+ employeeCardArray.forEach(card => {
+    const p = card.querySelector("p");
+    if (p) {
+        p.textContent += " - Updated";
+    }
+ })
+
 
